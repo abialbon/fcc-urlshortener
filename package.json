@@ -1,0 +1,29 @@
+{
+  "name": "fcc-urlshortener",
+  "version": "1.0.0",
+  "description": "A simple url shortener for FCC",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abialbon/fcc-urlshortener.git"
+  },
+  "keywords": [
+    "url",
+    "shorten",
+    "express",
+    "fcc"
+  ],
+  "author": "Abialbon Paul",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abialbon/fcc-urlshortener/issues"
+  },
+  "homepage": "https://github.com/abialbon/fcc-urlshortener#readme",
+  "dependencies": {
+    "express": "^4.15.5",
+    "mongoose": "^4.11.13"
+  }
+}
