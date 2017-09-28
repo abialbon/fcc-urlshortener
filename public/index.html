@@ -11,16 +11,25 @@
         function getShortUrl() {
             var urlToShorten = document.getElementById('url').value;
             var requestUrl = 'https://pauls-playground-abialbonpaul.c9users.io/new/' + urlToShorten;
-            console.log(requestUrl);
             urlPromise = axios.get(requestUrl);
             urlPromise.then(function(response) { 
-                var shortlink = document.getElementById('shortlink');
+                var shortlink = document.getElementById('result');
                     if (response.data.short_url) {
-                        shortlink.innerHTML = response.data.short_url;
+                        shortlink.value = response.data.short_url;
                     } else {
-                        shortlink.innerHTML = response.data;
+                        shortlink.value = response.data;
                     }
                 });
+        }
+        function copyText() {
+            var copyTextArea = document.getElementById('result');
+            copyTextArea.select();
+            try {
+                document.execCommand('copy');
+            }
+            catch (error) {
+                alert('There was a problem copying the text');
+            }
         }
     </script>
 </head>
@@ -31,8 +40,9 @@
             <input id="url" type="url" name="url" placeholder="https://www.example.com"/>
             <button onclick="getShortUrl()">Shorten</button>
         </div>
-        <div class="result">
-            <span id="shortlink"></span>
+        <div class="textarea">
+            <textarea id = "result"></textarea>
+            <button onclick="copyText()">Copy</button>
         </div>
     </div>
     <div class="footer">

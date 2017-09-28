@@ -41,14 +41,17 @@ button {
     background-color: #7FDBFF;
     color: #001f3f;
 }
-.result {
+.textarea {
     margin-top: 20px;
-    height: 100px;
-    justify-content: center;
+    display: flex;
+}
+#result {
+    height: 56px;
     background-color: #7FDBFF;
     color: #001f3f;
-    display: flex;
-    align-items: center;
+    width: 300px;
+    font-size: 1.125rem;
+    margin-right: 4px;
 }
 .footer {
     width: 100%;
