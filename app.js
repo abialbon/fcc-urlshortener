@@ -8,12 +8,26 @@ mongoose.connect('mongodb://localhost/url');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/test', (req, res) => {
+   res.send(JSON.stringify(req.headers)); 
+});
+
+app.get('/:shortID', (req, res) => {
+    Url.findOne({ number: req.params.shortID }, (error, urlEntry) => {
+       if(error) {
+           res.send("There is no associated link");
+       } else {
+           res.redirect(urlEntry.url);
+       }
+    });
+});
+
 app.get('/new/:url*', (req, res) => {
     // Get the url and get it formatted
     const inputUrl = (req.url).split("").splice(5).join("");
     // Check for the validity of the URL
     function urlIsValid(url) {
-        const urlPattern = /(http(s)?:\/\/)?(www\.)[a-z0-9]*\.(.)*/i;
+        const urlPattern = /(http(s)?:\/\/)(www\.)?[a-z0-9]*\.(.)*/i;
         return urlPattern.test(url);
     }
     const responseObj = {};
@@ -31,7 +45,7 @@ app.get('/new/:url*', (req, res) => {
                         url: inputUrl
                     }
                     Url.create(newUrlEntry, function(error, urlEntry){
-                        responseObj.short_url = req.headers.host + '/' + urlEntry.number;
+                        responseObj.short_url = req.headers['x-forwarded-proto'] + '://' + req.headers.host + '/' + urlEntry.number;
                         res.send(JSON.stringify(responseObj));
                         return;
                     });
@@ -39,7 +53,7 @@ app.get('/new/:url*', (req, res) => {
              
             // If present, send the number  
             } else {
-                responseObj.short_url = req.headers.host + '/' + url.number;
+                responseObj.short_url = req.headers['x-forwarded-proto'] + '://' + req.headers.host + '/' + url.number;
                 res.send(JSON.stringify(responseObj));
                 return;
             }
