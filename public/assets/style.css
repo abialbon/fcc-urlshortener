@@ -41,6 +41,15 @@ button {
     background-color: #7FDBFF;
     color: #001f3f;
 }
+.result {
+    margin-top: 20px;
+    height: 100px;
+    justify-content: center;
+    background-color: #7FDBFF;
+    color: #001f3f;
+    display: flex;
+    align-items: center;
+}
 .footer {
     width: 100%;
     position: absolute;
